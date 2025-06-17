@@ -1,24 +1,95 @@
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Extincted PK</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
 
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>My First Website</title>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      </Head>
-      <header className={styles.header}>
-        <h1>Welcome to My Website</h1>
-      </header>
-      <main className={styles.main}>
-        <p>This is a simple homepage built with HTML and CSS.</p>
-        <p>Click here to learn more: <a href="/about">About</a></p>
-      </main>
-      <footer className={styles.footer}>
-        &copy; 2025 My Website
-      </footer>
-    </>
-  );
-}
+    header {
+      background-color: #1e1e1e;
+      color: white;
+      padding: 20px;
+      animation: slideDown 1s ease-out forwards;
+    }
+
+    main {
+      padding: 40px;
+      font-size: 18px;
+      color: #333;
+      opacity: 0;
+      animation: fadeIn 1s ease-in 1s forwards;
+    }
+
+    footer {
+      background-color: #f1f1f1;
+      padding: 10px;
+      font-size: 14px;
+      color: #666;
+      opacity: 0;
+      animation: slideUp 1s ease-in 2s forwards;
+    }
+
+    a {
+      color: #0070f3;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to Extincted PK</h1>
+  </header>
+
+  <main>
+    <p>This is the official homepage of <strong>Extincted PK</strong>.</p>
+    <p>Click here to learn more: <a href="about.html">About</a></p>
+  </main>
+
+  <footer>
+    &copy; 2025 Extincted PK
+  </footer>
+
+</body>
+</html>
