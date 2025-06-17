@@ -1,95 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Extincted PK</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extincted PK - Join Now</title>
+    <style>
+        /* Gaming-style CSS with neon effects */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 20, 20, 0.15) 0%, transparent 25%),
+                linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-    header {
-      background-color: #1e1e1e;
-      color: white;
-      padding: 20px;
-      animation: slideDown 1s ease-out forwards;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
 
-    main {
-      padding: 40px;
-      font-size: 18px;
-      color: #333;
-      opacity: 0;
-      animation: fadeIn 1s ease-in 1s forwards;
-    }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ff1414;
+            text-shadow: 0 0 10px rgba(255, 20, 20, 0.5);
+            letter-spacing: 2px;
+        }
 
-    footer {
-      background-color: #f1f1f1;
-      padding: 10px;
-      font-size: 14px;
-      color: #666;
-      opacity: 0;
-      animation: slideUp 1s ease-in 2s forwards;
-    }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
 
-    a {
-      color: #0070f3;
-      text-decoration: none;
-    }
+        .join-button {
+            display: inline-block;
+            background-color: #ff1414;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            border: 2px solid #ff1414;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 20, 20, 0.5);
+            cursor: pointer;
+        }
 
-    a:hover {
-      text-decoration: underline;
-    }
+        .join-button:hover {
+            background-color: transparent;
+            color: #ff1414;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 20, 20, 0.8);
+        }
 
-    /* Animations */
-    @keyframes slideDown {
-      from {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
+        .about-link {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-top: 1rem;
+            transition: color 0.3s;
+        }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
+        .about-link:hover {
+            color: #ff1414;
+            text-decoration: underline;
+        }
 
-    @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-  </style>
+        footer {
+            margin-top: auto;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            width: 100%;
+            border-top: 1px solid #333;
+        }
+
+        strong {
+            color: #ff1414;
+        }
+
+        /* Join Form Styles - Initially Hidden */
+        .join-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 2px solid #ff1414;
+            box-shadow: 0 0 25px rgba(255, 20, 20, 0.6);
+            z-index: 100;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .join-form h2 {
+            color: #ff1414;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ddd;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .submit-btn, .cancel-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn {
+            background-color: #ff1414;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff0000;
+        }
+
+        .cancel-btn {
+            background-color: #333;
+            color: #aaa;
+            border: 1px solid #444;
+        }
+
+        .cancel-btn:hover {
+            background-color: #444;
+            color: #ddd;
+        }
+
+        /* Thank You Page - Full Screen with Blinking Text */
+        .thank-you-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 200;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .blinking-text {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #ff1414;
+            text-shadow: 0 0 20px rgba(255, 20, 20, 0.8);
+            animation: blink 0.5s infinite alternate;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .thank-you-message {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .continue-btn {
+            background-color: #ff1414;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .continue-btn:hover {
+            background-color: #ff0000;
+            transform: scale(1.05);
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 50;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .join-button {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            .join-form {
+                padding: 1.5rem;
+            }
+            .blinking-text {
+                font-size: 3rem;
+            }
+            .thank-you-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <h1>Welcome to Extincted PK</h1>
+        <p>This is the official homepage of <strong>Extincted PK</strong>.</p>
+        
+        <button id="joinBtn" class="join-button">Click Here to Join</button>
+        
+        <a href="/about" class="about-link">Learn more about us</a>
+    </div>
 
-  <header>
-    <h1>Welcome to Extincted PK</h1>
-  </header>
+    <!-- Join Form (Hidden by default) -->
+    <div class="overlay" id="overlay"></div>
+    <div class="join-form" id="joinForm">
+        <h2>Join Extincted PK</h2>
+        <form id="membershipForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="ign">In-Game Name</label>
+                <input type="text" id="ign" required>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
 
-  <main>
-    <p>This is the official homepage of <strong>Extincted PK</strong>.</p>
-    <p>Click here to learn more: <a href="about.html">About</a></p>
-  </main>
+    <!-- Thank You Page (Full Screen with Blinking Text) -->
+    <div class="thank-you-page" id="thankYouPage">
+        <div class="blinking-text">EXTINCTED PK</div>
+        <div class="thank-you-message">
+            Your application has been received! We will contact you soon.<br>
+            Prepare for battle - the PK awaits!
+        </div>
+        <button class="continue-btn" id="continueBtn">CONTINUE</button>
+    </div>
 
-  <footer>
-    &copy; 2025 Extincted PK
-  </footer>
+    <footer>
+        © 2025 Extincted PK - All Rights Reserved
+    </footer>
 
+    <script>
+        // Form Handling
+        const joinBtn = document.getElementById('joinBtn');
+        const joinForm = document.getElementById('joinForm');
+        const overlay = document.getElementById('overlay');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const form = document.getElementById('membershipForm');
+        const thankYouPage = document.getElementById('thankYouPage');
+        const continueBtn = document.getElementById('continueBtn');
+
+        // Show join form
+        joinBtn.addEventListener('click', () => {
+            joinForm.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        // Cancel button
+        cancelBtn.addEventListener('click', () => {
+            joinForm.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Overlay click
+        overlay.addEventListener('click', () => {
+            joinForm.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Hide form and show thank you page
+            joinForm.style.display = 'none';
+            overlay.style.display = 'none';
+            thankYouPage.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Here you would normally send data to server
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                ign: document.getElementById('ign').value
+            };
+            console.log('Form submitted:', formData);
+            
+            // Reset form
+            form.reset();
+        });
+
+        // Continue button
+        continueBtn.addEventListener('click', () => {
+            thankYouPage.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        });
+    </script>
 </body>
 </html>
