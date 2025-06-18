@@ -115,7 +115,7 @@
             color: #ff1414;
         }
 
-        /* Join Form Styles */
+        /* Join Form Styles - Initially Hidden */
         .join-form {
             display: none;
             position: fixed;
@@ -214,7 +214,7 @@
             transform: scale(1.05);
         }
 
-        /* Thank You Page */
+        /* Thank You Page - Full Screen with Blinking Text */
         .thank-you-page {
             display: none;
             position: fixed;
@@ -243,17 +243,27 @@
 
         .thank-you-message {
             font-size: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             line-height: 1.5;
             max-width: 90%;
         }
 
-        .countdown {
-            font-size: 1.5rem;
-            color: #ff1414;
-            margin-top: 1rem;
+        .continue-btn {
+            padding: 12px 25px;
+            background-color: #ff1414;
+            color: white;
+            border: none;
+            border-radius: 4px;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 20, 20, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .continue-btn:hover {
+            background-color: #ff0000;
+            transform: scale(1.05);
         }
 
         /* Animations */
@@ -298,7 +308,7 @@
             animation: fadeIn 0.3s ease-in;
         }
 
-        /* Responsive adjustments */
+        /* Responsive adjustments for very small devices */
         @media (max-width: 400px) {
             h1 {
                 font-size: 2rem;
@@ -319,12 +329,9 @@
             .thank-you-message {
                 font-size: 0.9rem;
             }
-            .countdown {
-                font-size: 1.2rem;
-            }
         }
 
-        /* Prevent zoom on input focus */
+        /* Prevent zoom on input focus on mobile */
         @media screen and (max-width: 767px) {
             input, select, textarea {
                 font-size: 16px !important;
@@ -344,7 +351,7 @@
         <button id="joinBtn" class="join-button">Click Here to Join</button>
     </div>
 
-    <!-- Join Form -->
+    <!-- Join Form (Hidden by default) -->
     <div class="overlay" id="overlay"></div>
     <div class="join-form" id="joinForm">
         <h2>Join Extincted PK</h2>
@@ -372,15 +379,14 @@
         </form>
     </div>
 
-    <!-- Thank You Page -->
+    <!-- Thank You Page (Full Screen with Blinking Text) -->
     <div class="thank-you-page" id="thankYouPage">
         <div class="blinking-text">EXTINCTED PK</div>
         <div class="thank-you-message">
-            WAIT.<br>
+            Your application has been received! We will contact you soon.<br>
+            Prepare for battle - the PK awaits!
         </div>
-        <div class="thank-you-message">
-            Redirecting in <span id="countdown">5</span> seconds...
-        </div>
+        <button class="continue-btn" id="continueBtn">CONTINUE</button>
     </div>
 
     <footer>
@@ -508,7 +514,7 @@
         const cancelBtn = document.getElementById('cancelBtn');
         const form = document.getElementById('membershipForm');
         const thankYouPage = document.getElementById('thankYouPage');
-        const countdownElement = document.getElementById('countdown');
+        const continueBtn = document.getElementById('continueBtn');
 
         // Show join form
         joinBtn.addEventListener('click', () => {
@@ -552,24 +558,48 @@
             // Reset form
             form.reset();
             
-            // Start countdown from 5 to 0
-            let countdown = 5;
-            countdownElement.textContent = countdown;
-            
-            const countdownInterval = setInterval(() => {
-                countdown--;
-                countdownElement.textContent = countdown;
+            // After 3 seconds, open new tab with same background and close current one
+            setTimeout(() => {
+                // Create HTML for new tab with same background
+                const newTabHTML = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Extincted PK</title>
+                        <style>
+                            body {
+                                margin: 0;
+                                padding: 0;
+                                background-color: #0a0a0a;
+                                background-image: 
+                                    radial-gradient(circle at 20% 30%, rgba(255, 20, 20, 0.15) 0%, transparent 25%),
+                                    linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 100%);
+                                height: 100vh;
+                                width: 100vw;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                    </body>
+                    </html>
+                `;
                 
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval);
-                    openNewTab();
-                }
-            }, 1000);
+                // Open new tab with the same background
+                const newTab = window.open();
+                newTab.document.write(newTabHTML);
+                
+                // Close current tab
+                window.close();
+            }, 3000);
         });
 
-        function openNewTab() {
-            // Create a simple HTML page for the new tab
-            const newTabContent = `
+        // Continue button
+        continueBtn.addEventListener('click', () => {
+            thankYouPage.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Create HTML for new tab with same background
+            const newTabHTML = `
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -583,40 +613,22 @@
                                 radial-gradient(circle at 20% 30%, rgba(255, 20, 20, 0.15) 0%, transparent 25%),
                                 linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 100%);
                             height: 100vh;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            color: white;
-                            font-family: 'Rajdhani', sans-serif;
-                        }
-                        h1 {
-                            color: #ff1414;
-                            text-shadow: 0 0 10px rgba(255, 20, 20, 0.5);
-                            animation: blink 1s infinite alternate;
-                        }
-                        @keyframes blink {
-                            0% { opacity: 0.3; text-shadow: 0 0 5px rgba(255, 20, 20, 0.3); }
-                            100% { opacity: 1; text-shadow: 0 0 20px rgba(255, 20, 20, 0.8); }
+                            width: 100vw;
                         }
                     </style>
                 </head>
                 <body>
-                    <h1>Welcome to Extincted PK Website
-                        Wait 2 , 3 days for full Complete</h1>
                 </body>
                 </html>
             `;
             
-            // Open new tab with the content
+            // Open new tab with the same background
             const newTab = window.open();
-            newTab.document.write(newTabContent);
-            newTab.document.close();
+            newTab.document.write(newTabHTML);
             
-            // Close current tab after a short delay
-            setTimeout(() => {
-                window.close();
-            }, 500);
-        }
+            // Close current tab
+            window.close();
+        });
 
         // Prevent zoom on mobile devices when input is focused
         document.addEventListener('touchstart', function(event) {
